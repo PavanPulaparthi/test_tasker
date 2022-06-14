@@ -1,0 +1,35 @@
+---
+- name: Install Dependencies, git, java, maven, jenkins
+  hosts: all
+
+  pre_tasks:
+    - name: Install Dependencies
+      become: yes
+      register: aptinstall
+      apt:
+        name:
+          - acl
+          - aptitude
+          - bzip2
+          - make
+          - python3-psycopg2
+          - tar
+          - virtualenv
+        state: latest
+        update_cache: yes
+
+  roles:
+    - geerlingguy.pip
+    - geerlingguy.git
+    - geerlingguy.java
+    - gantsign.maven
+    - geerlingguy.jenkins
+    - role: robertdebock.tomcat
+      
+
+  tasks:
+    - name: clone remote git repository
+      git:
+        repo: https://github.com/pavanpulaparthi
+        dest: /home/ubuntu/newgit  	
+  ...

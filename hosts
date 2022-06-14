@@ -1,0 +1,5 @@
+[foo]
+ip 
+
+[goo]
+ip  ansible_connection=remote ansible_user=ubuntu
